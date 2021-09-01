@@ -35,17 +35,3 @@ CREATE TABLE IF NOT EXISTS `datas` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
 
 --
--- 转存表中的数据 `datas`
---
-
-INSERT INTO `datas` (`id`, `title`, `link`, `date`) VALUES
-(1, '菜鸟教程 - 学的不仅是技术，更是梦想！', 'https://www.runoob.com/', '2021-09-01 12:35'),
-(2, '菜鸟笔记 | 菜鸟教程', 'https://www.runoob.com/w3cnote/', '2021-09-01 12:35'),
-(3, '菜鸟笔记 | 菜鸟教程', 'https://www.runoob.com/w3cnote', '2021-09-01 12:35'),
-(4, '1.0 Android基础入门教程 | 菜鸟教程', 'https://www.runoob.com/w3cnote/android-tutorial-intro.html', '2021-09-01 12:35'),
-(5, '1.1  ES6 教程 | 菜鸟教程', 'https://www.runoob.com/w3cnote/es6-tutorial.html', '2021-09-01 12:35'),
-(6, '1.0 十大经典排序算法 | 菜鸟教程', 'https://www.runoob.com/w3cnote/ten-sorting-algorithm.html', '2021-09-01 12:35');
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
