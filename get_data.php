@@ -15,7 +15,7 @@
 	 curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false); //设置https
 	 curl_setopt($curl, CURLOPT_FOLLOWLOCATION, 1);//302重定向
 	 $data  =  curl_exec ( $curl ) ;//执行请求
-	 $state = curl_getinfo($curl,CURLINFO_HTTP_CODE);
+	 $state =  curl_getinfo($curl,CURLINFO_HTTP_CODE);
 	 if($state = "200")
 	 {
 		 $sql = "SELECT id FROM datas WHERE link='$url'" ;
@@ -60,9 +60,10 @@
 						}
 						get_data($url); //递归调用函数，循环获取URL
 					}
-			   }
+			    }
 			 }
-		 }
-     }
+		 }     
+	 }
+    curl_close($curl);
  }
 ?>
