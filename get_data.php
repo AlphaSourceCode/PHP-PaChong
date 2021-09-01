@@ -15,55 +15,51 @@
 	 curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false); //设置https
 	 curl_setopt($curl, CURLOPT_FOLLOWLOCATION, 1);//302重定向
 	 $data  =  curl_exec ( $curl ) ;//执行请求
-	 $state =  curl_getinfo($curl,CURLINFO_HTTP_CODE);
+	 $state = curl_getinfo($curl,CURLINFO_HTTP_CODE);
 	 if($state = "200")
 	 {
 		 $sql = "SELECT id FROM datas WHERE link='$url'" ;
-		 if ($result = $mysqli->query($sql))
+	     $result = $mysqli->query($sql)
+		 $count = $result->num_rows;
+		 if($count == 0)
 		 {
-			 $count = $result->num_rows;
-			 if($count == 0)
-			 {
-			   $preg ='/<title>([\S\s]*?)<\/title>/is';
-			   preg_match_all($preg,$data,$array2);
-			   $title =  $array2[1][0];
-			   $date = date("Y-m-d H:i",time());
-			   $sql = "INSERT INTO datas (title,link,date) VALUES ('$title','$url','$date')"; //数据插入到数据库
-			   if($mysqli->query($sql))
-			   { 
-					$preg='/<a .*?href="(.*?)".*?>/is';
-					 preg_match_all($preg,$data,$array2); 
-					 for($i=0;$i<count($array2[1]);$i++)
-					 {
-						$url = ltrim($array2[1][$i]);
-						if(strpos($url, '/') == 0)
-						{
-							$url = preg_replace('/\//','',$url,1); //去掉符号"/"
-						}
-						if(strpos($url, '/') == 0)
-						{
-							$url = preg_replace('/\//','',$url,1);//再一次去掉符号"/"
-						}
-						if (strpos($url, 'runoob') !== false) {
-							$url = $url;
-						}
-						else
-						{
-							$url = "www.runoob.com/".$url; //链接补上www.runoob.com/
-						}
-						if (strpos($url, 'http') !== false) {
-							$url = $url;
-						}
-						else
-						{
-							$url = "https://".$url; //链接补上https://
-						}
-						get_data($url); //递归调用函数，循环获取URL
-					}
-			    }
-			 }
-		 }     
-	 }
-    curl_close($curl);
+			$preg ='/<title>([\S\s]*?)<\/title>/is';
+			preg_match_all($preg,$data,$array2);
+			$title =  $array2[1][0];
+			$date = date("Y-m-d H:i",time());
+			$sql = "INSERT INTO datas (title,link,date) VALUES ('$title','$url','$date')"; //数据插入到数据库
+			$mysqli->query($sql)
+			$preg='/<a .*?href="(.*?)".*?>/is';
+			preg_match_all($preg,$data,$array2); 
+			for($i=0;$i<count($array2[1]);$i++)
+			{
+				$url = ltrim($array2[1][$i]);
+				if(strpos($url, '/') == 0)
+				{
+					$url = preg_replace('/\//','',$url,1); //去掉符号"/"
+				}
+				if(strpos($url, '/') == 0)
+				{
+					$url = preg_replace('/\//','',$url,1);//再一次去掉符号"/"
+				}
+				if (strpos($url, 'runoob') !== false) {
+					$url = $url;
+				}
+				else
+				{
+					$url = "www.runoob.com/".$url; //链接补上www.runoob.com/
+				}
+				if (strpos($url, 'http') !== false) {
+					$url = $url;
+				}
+				else
+				{
+					$url = "https://".$url; //链接补上https://
+				}
+				get_data($url); //递归调用函数，循环获取URL
+			}   
+		 }
+     }
+	 curl_close($curl);
  }
 ?>
