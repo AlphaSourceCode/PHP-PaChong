@@ -30,8 +30,8 @@
 		   $sql = "INSERT INTO datas (title,link,date) VALUES ('$title','$url','$date')"; //数据插入到数据库
 		   $mysqli->query($sql);
 		   $preg='/<a .*?href="(.*?)".*?>/is';
-		    preg_match_all($preg,$data,$array2); 
-			for($i=0;$i<count($array2[1]);$i++)
+		   preg_match_all($preg,$data,$array2); 
+		   for($i=0;$i<count($array2[1]);$i++)
 			{
 				$url = ltrim($array2[1][$i]);
 				if(strpos($url, '/') == 0)
@@ -59,7 +59,7 @@
 				get_data($url); //递归调用函数，循环获取URL
 			}
 		 }
-     }
+     	 }
 	 curl_close($curl);
  }
 ?>
