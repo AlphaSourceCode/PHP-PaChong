@@ -101,16 +101,16 @@
 				}
 			}				   
 		}
-	   $GLOBALS["id"] = $row["id"] + 1;
-	   $id = $GLOBALS["id"];
-	   $sql = "SELECT link FROM list WHERE id='$id'" ;
-	   $result = $GLOBALS["mysqli"]->query($sql);
-	   $row = $result->fetch_assoc();
-	   $count = $result->num_rows;
-	   if($count > 0)
-	   {
-		get_data($row['link']);
-	   }	
+		$GLOBALS["id"] = $GLOBALS["id"] + 1;
+		$id = $GLOBALS["id"];
+		$sql = "SELECT link FROM list WHERE id='$id'" ;
+		$result = $GLOBALS["mysqli"]->query($sql);
+		$row = $result->fetch_assoc();
+		$count = $result->num_rows;
+		if($count > 0)
+		{
+			get_data($row['link']);
+		}	
 	}
  }
 
