@@ -63,43 +63,40 @@
 		$preg='/<a .*?href="(.*?)".*?>/is';
 		preg_match_all($preg,$data,$results);
 		$link_count = count($results[1]);
-		if($link_count > 0)
+		for($i=0;$i<$link_count;$i++)
 		{
-			for($i=0;$i<$link_count;$i++)
+			$urls = ltrim($results[1][$i]);
+			if(strpos($urls, '/') == 0)
 			{
-				$urls = ltrim($results[1][$i]);
-				if(strpos($urls, '/') == 0)
-				{
-					$urls = preg_replace('/\//','',$urls,1); //去掉符号"/"
-				}
-				if(strpos($urls, '/') == 0)
-				{
-					$urls = preg_replace('/\//','',$urls,1);//再一次去掉符号"/"
-				}
-				if (strpos($urls, $GLOBALS["host"]) !== false) {
-					$urls = $urls;
-				}
-				else
-				{
-					$urls = "www.".$GLOBALS["host"].".com/".$urls; //链接补上域名
-				}
-				if (strpos($urls, 'http') !== false) {
-					$urls = $urls;
-				}
-				else
-				{
-					$urls = "https://".$urls; //链接补上https://
-				}
-				$sql = "SELECT id FROM list WHERE link='$urls'" ;
-				$result = $GLOBALS["mysqli"]->query($sql);
-				$count = $result->num_rows;
-				if($count == 0)
-				{
-					$sql = "INSERT INTO list (link) VALUES ('$urls')"; //数据插入到数据库
-					$GLOBALS["mysqli"]->query($sql);
-				}
-			}				   
-		}	   	   
+				$urls = preg_replace('/\//','',$urls,1); //去掉符号"/"
+			}
+			if(strpos($urls, '/') == 0)
+			{
+				$urls = preg_replace('/\//','',$urls,1);//再一次去掉符号"/"
+			}
+			if (strpos($urls, $GLOBALS["host"]) !== false) {
+				$urls = $urls;
+			}
+			else
+			{
+				$urls = "www.".$GLOBALS["host"].".com/".$urls; //链接补上域名
+			}
+			if (strpos($urls, 'http') !== false) {
+				$urls = $urls;
+			}
+			else
+			{
+				$urls = "https://".$urls; //链接补上https://
+			}
+			$sql = "SELECT id FROM list WHERE link='$urls'" ;
+			$result = $GLOBALS["mysqli"]->query($sql);
+			$count = $result->num_rows;
+			if($count == 0)
+			{
+				$sql = "INSERT INTO list (link) VALUES ('$urls')"; //数据插入到数据库
+				$GLOBALS["mysqli"]->query($sql);
+			}
+		}				   	   	   
 	}
 	$GLOBALS["id"] = $GLOBALS["id"] + 1;
 	$id = $GLOBALS["id"];
