@@ -99,17 +99,17 @@
 					$GLOBALS["mysqli"]->query($sql);
 				}
 			}				   
-		}
-	   $GLOBALS["id"] = $GLOBALS["id"] + 1;
-	   $id = $GLOBALS["id"];
-	   $sql = "SELECT link FROM list WHERE id='$id'" ;
-	   $result = $GLOBALS["mysqli"]->query($sql);
-	   $row = $result->fetch_assoc();
-	   $count = $result->num_rows;
-	   if($count > 0)
-	   {
-		   $GLOBALS["url"] = $row['link'];
-	   }	   
+		}	   	   
+	}
+	$GLOBALS["id"] = $GLOBALS["id"] + 1;
+	$id = $GLOBALS["id"];
+	$sql = "SELECT link FROM list WHERE id='$id'" ;
+	$result = $GLOBALS["mysqli"]->query($sql);
+	$row = $result->fetch_assoc();
+	$count = $result->num_rows;
+	if($count > 0)
+	{
+	   $GLOBALS["url"] = $row['link'];
 	}
  }
   curl_close($GLOBALS["curl"]);
