@@ -106,7 +106,11 @@
 	   $sql = "SELECT link FROM list WHERE id='$id'" ;
 	   $result = $GLOBALS["mysqli"]->query($sql);
 	   $row = $result->fetch_assoc();
-	   get_data($row['link']);
+	   $count = $result->num_rows;
+	   if($count > 0)
+	   {
+		get_data($row['link']);
+	   }	
 	}
  }
 
