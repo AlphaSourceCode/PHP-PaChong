@@ -1,5 +1,5 @@
 <?php
-
+ //这个会报错
  ignore_user_abort (TRUE);  
  set_time_limit (0);
  $GLOBALS["host"] = 'runoob'; //主域名
